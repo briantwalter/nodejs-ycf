@@ -7,3 +7,8 @@ Simple application that reads cat facts from a public API over http using REST a
 ### Usage
 
 Run me as `nodejs ycf.js`
+
+### Data Sources
+
+Cat facts: http://catfacts-api.appspot.com/api/facts
+Yoda translation: http://www.yodaspeak.co.uk/webservice/yodatalk.php?wsdl
