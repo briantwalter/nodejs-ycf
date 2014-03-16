@@ -23,10 +23,11 @@ restclient.methods.jsonMethod(function (request, response) {
 });
 // translate the fact to yoda speak
 var args = {inputText: "Cats have 9 lives."};
-console.log("DEBUG: args are " + args);
+console.log("DEBUG: args are " + args.inputText );
 Soap.createClient(yodaapi, function (error, client) {
-  client.yodaTalkRequest(args, function (err, result) {
-    console.log("DEBUG: " + result);
+  //console.log("DEBUG: " + result);
+  client.yodaTalkRequest(args, function (error, result) {
+    console.log("DEBUG: " + client.describe());
   });
 });
 
