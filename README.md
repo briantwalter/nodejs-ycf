@@ -11,13 +11,11 @@ Run me as `nodejs ycf.js`
 ### Verified versions
 
 Node version v0.10.15 on Ubuntu 13.10 x86_64
-
 Node version v0.10.24 on Rasbian Wheezy arm Raspberry Pi
 
 ### Data Sources
 
 Cat facts: http://catfacts-api.appspot.com/api/facts
-
 Yoda translation: http://www.yodaspeak.co.uk/webservice/yodatalk.php?wsdl
 
 ### Utilities
