@@ -19,10 +19,15 @@ restclient.methods.jsonMethod(function (request, response) {
   // create soap client for yoda translation
   soap.createClient(yodaapi, function(err, client) {
     if (err) {
-     //console.log("DEBUG: there was a problem with the soap url");
+      //console.log("DEBUG: there was a problem with the soap url");
+      console.log("FATAL");
+      process.exit(code=11);
     };
     client.yodaTalk(args, function(err, result) {
-      //console.log("DEBUG: YODA: " + result.return);
+      if (err) {
+        console.log("FATAL");
+        process.exit(code=12);
+      };
       console.log(result.return);
     });
   });
