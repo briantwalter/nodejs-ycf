@@ -1,0 +1,13 @@
+/* Stylesheet for Yoda's Cat Facts 				*/ 
+/* make sure to install font in ~/.fonts			*/
+/* font choices: Bangers, Chinacat, McLaren, PineLintGerm 	*/
+div.yoda {
+  font-family: "Bangers";
+  font-size: 100px;
+  width: 1000px;
+  padding: 10px;
+  border: 1px solid gray;
+  margin: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
