@@ -4,11 +4,12 @@
 div.yoda {
   font-family: "Chinacat";
   font-size: 90px;
-  width: 1000px;
-  padding: 10px;
-  border: 1px solid gray;
+  width: 1050px;
+  padding: 5px;
+  border: 0px solid gray;
   margin: 0px;
-  margin-top: 100px;
+  margin-top: 80px;
   margin-right: auto;
   margin-left: auto;
+  text-align: center;
 }
