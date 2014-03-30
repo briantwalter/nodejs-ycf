@@ -13,3 +13,12 @@ div.yoda {
   margin-left: auto;
   text-align: center;
 }
+div.ip {
+  font-family: "Arial";
+  font-size: 10px;
+  color: #CCCCCC;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 80px;
+}
