@@ -11,41 +11,43 @@ var catsapi = 'http://catfacts-api.appspot.com/api/facts';
 var yodaapi = 'http://www.yodaspeak.co.uk/webservice/yodatalk.php?wsdl';
 
 // functions
-// build and show the catfact page
-function showpage() {
+
+// get catfact less than 140 chars
+function getcatfact() {
+  var catfact = "";
   var restclient = new rest();
   restclient.registerMethod("jsonMethod", catsapi, "GET");
   restclient.methods.jsonMethod(function (request, response) {
-    // check cats api call
-    console.log("DEBUG: made REST call on: " + catsapi);
     var catfact = JSON.parse(request);
-    // check object for a single cat fact
-    console.log("DEBUG: CATS: " + catfact.facts);
-    // construct soap payload
-    var args = {inputText: catfact.facts};
-    console.log("DEBUG: made SOAP call on: " + yodaapi);
-    // create soap client for yoda translation
-    soap.createClient(yodaapi, function(err, client) {
-      if (err) {
-       console.log("DEBUG: there was a problem with the soap url");
-      };
-      client.yodaTalk(args, function(err, result) {
-        console.log("DEBUG: YODA: " + result.return);
-        var catfact = result.return;
-        // create and display the page
-        app.get('/', function(req, res) {
-          res.render('index',
-          { 
-            title: "my title",
-            catfact: catfact,
-            myipaddr: "10.0.1.1" 
-          }
-          )
-        })
-      });
-    });
-  });
+    var reallength = new String(catfact.facts);
+    console.log("DEBUG: reallength is: " + reallength.length);
+    console.log("DEBUG: catfact is: " + catfact.facts);
+    if ( reallength.length > 140 )
+      getcatfact();
+    })
+    return catfact.facts;
 }
+
+// translate passed in text
+function yodaspeak(english) {
+  var yodaspeak = ""
+  var args = {inputText: english};
+  // create soap client for yoda translation
+  soap.createClient(yodaapi, function(err, client) {
+    if (err) {
+     console.log("DEBUG: there was a problem with the soap url");
+    };
+    client.yodaTalk(args, function(err, result) {
+      console.log("DEBUG: translated " + english + " into Yoda speak as " + result.return);
+      yodaspeak = result.return;
+    })
+  })
+  return yodaspeak;
+}
+
+// debugging calls
+var test = yodaspeak("cats have 9 lives");
+console.log("DEBUG: this is the return val " + test);
 
 // main
 var app = express();
@@ -55,8 +57,13 @@ app.use(app.router);
 app.use(express.logger('dev'))
 app.use(express.static(__dirname + '/html'))
 app.use(express.errorHandler());
-// build and show page
-showpage();
+
+// create and display the page
+app.get('/', function(req, res) {
+  res.render('index',
+    { title: "my title", catfact: "my cat fact", myipaddr: "10.0.1.1" }
+  )
+})
 
 // start the http server
 app.listen(port)
