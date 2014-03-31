@@ -23,10 +23,11 @@ app.use(express.errorHandler());
 // create and display the page
 app.get('/', function(req, res) {
   res.render('index',
-  { title: "my title" }
-//  { title: "my title" },
-//  { catfact: "my cat fact" }
-//  { myipaddr: "10.0.1.1" }
+  { 
+    title: "my title",
+    catfact: "my cat fact", 
+    myipaddr: "10.0.1.1" 
+  }
   )
 })
 
