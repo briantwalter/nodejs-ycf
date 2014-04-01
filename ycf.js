@@ -3,6 +3,7 @@
 //
 
 // variables
+var os = require("os");
 var express = require('express');
 var rest = require('node-rest-client').Client;
 var soap = require('soap');
@@ -45,9 +46,26 @@ function yodaspeak(english) {
   return yodaspeak;
 }
 
+// get local machine's IPv4 addresses
+function getipaddr() {
+  var interfaces = os.networkInterfaces();
+  var addresses = [];
+  for (i in interfaces) {
+      for (i2 in interfaces[i]) {
+          var address = interfaces[i][i2];
+          if (address.family == 'IPv4' && !address.internal) {
+              addresses.push(address.address)
+          }
+      }
+  }
+  console.log("DEBUG: IPv4 addrs are " + addresses);
+  return addresses;
+}
+
 // debugging calls
-var test = yodaspeak("cats have 9 lives");
-console.log("DEBUG: this is the return val " + test);
+//var test = yodaspeak("cats have 9 lives");
+//console.log("DEBUG: this is the return val " + test);
+getipaddr();
 
 // main
 var app = express();
