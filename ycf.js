@@ -10,6 +10,9 @@ var soap = require('soap');
 var port = '8800';
 var catsapi = 'http://catfacts-api.appspot.com/api/facts';
 var yodaapi = 'http://www.yodaspeak.co.uk/webservice/yodatalk.php?wsdl';
+var title = "Yoda's Cat Facts";
+var catfact = "BLANK";
+var myipaddr = "BLANK";
 
 // functions
 
@@ -65,7 +68,7 @@ function getipaddr() {
 // debugging calls
 //var test = yodaspeak("cats have 9 lives");
 //console.log("DEBUG: this is the return val " + test);
-getipaddr();
+//getipaddr();
 
 // main
 var app = express();
@@ -76,10 +79,11 @@ app.use(express.logger('dev'))
 app.use(express.static(__dirname + '/html'))
 app.use(express.errorHandler());
 
-// create and display the page
+// create and display the page if requested
 app.get('/', function(req, res) {
+  var myipaddr = getipaddr();
   res.render('index',
-    { title: "my title", catfact: "my cat fact", myipaddr: "10.0.1.1" }
+    { title: title, catfact: catfact, myipaddr: myipaddr }
   )
 })
 
