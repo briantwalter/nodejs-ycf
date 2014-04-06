@@ -1,6 +1,9 @@
 //
 // ycf.js
 //
+// Special thanks to Barry Johnson for the help on callbacks
+// http://stackoverflow.com/questions/22898894/simple-flow-control-in-nodejs
+//
 
 // variables
 var os = require("os");
@@ -14,6 +17,10 @@ var title = "Yoda's Cat Facts";
 var catfact = "BLANK";
 var myipaddr = "BLANK";
 
+// start daemon process
+require('daemon');
+console.log("Daemon started with PID: " + process.pid);
+
 // functions
 
 // get catfact less than 140 chars
@@ -24,12 +31,11 @@ function getcatfact(callback) {
   restclient.methods.jsonMethod(function (request, response) {
     var catfact = JSON.parse(request);
     var reallength = new String(catfact.facts);
-    console.log("DEBUG: reallength is: " + reallength.length);
-    console.log("DEBUG: catfact is: " + catfact.facts);
+    //console.log("DEBUG: reallength is: " + reallength.length);
+    ////console.log("DEBUG: catfact is: " + catfact.facts);
     if ( reallength.length > 140 )
-      getcatfact();
+      callback("Cats have 9 lives.")
     else {
-      console.log("DEBUG: callback inside getcatfact is: " + catfact.facts);
       callback(catfact.facts);
     }
   })
@@ -37,15 +43,14 @@ function getcatfact(callback) {
 
 // translate passed in text
 function yodaspeak(english, callback) {
-  console.log("DEBUG: starting yodaspeak func, english is: " + english);
   var args = {inputText: english};
   // create soap client for yoda translation
   soap.createClient(yodaapi, function(err, client) {
     if (err) {
-     console.log("DEBUG: there was a problem with the soap url");
+     //console.log("DEBUG: there was a problem with the soap url");
     };
     client.yodaTalk(args, function(err, result) {
-      console.log("DEBUG: translated " + english + " into Yoda speak as " + result.return);
+      //console.log("DEBUG: translated " + english + " into Yoda speak as " + result.return);
       callback(result.return);
     })
   })
@@ -63,7 +68,7 @@ function getipaddr() {
           }
       }
   }
-  console.log("DEBUG: IPv4 addrs are " + addresses);
+  //console.log("DEBUG: IPv4 addrs are " + addresses);
   return addresses;
 }
 
@@ -90,7 +95,3 @@ app.get('/', function(req, res) {
 
 // start the http server
 app.listen(port)
-
-// start daemon process
-//require('daemon');
-//console.log("Daemon started with PID: " + process.pid);
