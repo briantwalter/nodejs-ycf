@@ -26,10 +26,13 @@ function getcatfact(callback) {
     var reallength = new String(catfact.facts);
     console.log("DEBUG: reallength is: " + reallength.length);
     console.log("DEBUG: catfact is: " + catfact.facts);
-    //if ( reallength.length > 140 )
-    //  getcatfact();
-    })
-    callback(catfact.facts);
+    if ( reallength.length > 140 )
+      getcatfact();
+    else {
+      console.log("DEBUG: callback inside getcatfact is: " + catfact.facts);
+      callback(catfact.facts);
+    }
+  })
 }
 
 // translate passed in text
