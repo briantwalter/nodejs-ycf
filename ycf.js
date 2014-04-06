@@ -26,15 +26,15 @@ function getcatfact(callback) {
     var reallength = new String(catfact.facts);
     console.log("DEBUG: reallength is: " + reallength.length);
     console.log("DEBUG: catfact is: " + catfact.facts);
-    if ( reallength.length > 140 )
-      getcatfact();
+    //if ( reallength.length > 140 )
+    //  getcatfact();
     })
     callback(catfact.facts);
 }
 
 // translate passed in text
-function yodaspeak(english) {
-  var yodaspeak = ""
+function yodaspeak(english, callback) {
+  console.log("DEBUG: starting yodaspeak func, english is: " + english);
   var args = {inputText: english};
   // create soap client for yoda translation
   soap.createClient(yodaapi, function(err, client) {
@@ -43,10 +43,9 @@ function yodaspeak(english) {
     };
     client.yodaTalk(args, function(err, result) {
       console.log("DEBUG: translated " + english + " into Yoda speak as " + result.return);
-      yodaspeak = result.return;
+      callback(result.return);
     })
   })
-  return yodaspeak;
 }
 
 // get local machine's IPv4 addresses
@@ -77,11 +76,13 @@ app.use(express.errorHandler());
 // create and display the page if requested
 app.get('/', function(req, res) {
   var myipaddr = getipaddr();
-  // problem area
-  catfact = yodaspeak(function getcatfact());
-  res.render('index',
-    { title: title, catfact: catfact, myipaddr: myipaddr }
-  )
+  getcatfact(function(catfact) {
+    yodaspeak(catfact, function(yodacatfact) {
+      res.render('index',
+        { title: title, catfact: yodacatfact, myipaddr: myipaddr }
+      )
+    });
+  });
 })
 
 // start the http server
