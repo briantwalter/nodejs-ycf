@@ -17,7 +17,7 @@ var myipaddr = "BLANK";
 // functions
 
 // get catfact less than 140 chars
-function getcatfact() {
+function getcatfact(callback) {
   var catfact = "";
   var restclient = new rest();
   restclient.registerMethod("jsonMethod", catsapi, "GET");
@@ -29,7 +29,7 @@ function getcatfact() {
     if ( reallength.length > 140 )
       getcatfact();
     })
-    return catfact.facts;
+    callback(catfact.facts);
 }
 
 // translate passed in text
@@ -65,11 +65,6 @@ function getipaddr() {
   return addresses;
 }
 
-// debugging calls
-//var test = yodaspeak("cats have 9 lives");
-//console.log("DEBUG: this is the return val " + test);
-//getipaddr();
-
 // main
 var app = express();
 app.set('views', __dirname + '/views')
@@ -82,6 +77,8 @@ app.use(express.errorHandler());
 // create and display the page if requested
 app.get('/', function(req, res) {
   var myipaddr = getipaddr();
+  // problem area
+  catfact = yodaspeak(function getcatfact());
   res.render('index',
     { title: title, catfact: catfact, myipaddr: myipaddr }
   )
