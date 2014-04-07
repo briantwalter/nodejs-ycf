@@ -1,24 +1,24 @@
 /* Stylesheet for Yoda's Cat Facts 				*/ 
 /* make sure to install font in ~/.fonts			*/
 /* font choices: Bangers, Chinacat, McLaren, PineLintGerm 	*/
+div.page {
+  width: 1060px;
+  height: 740px;
+  padding: 100px;
+  border: 0px solid gray;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
 div.yoda {
   font-family: "Chinacat";
   font-size: 90px;
-  width: 1050px;
-  padding: 5px;
   border: 0px solid gray;
-  margin: 0px;
-  margin-top: 80px;
-  margin-right: auto;
-  margin-left: auto;
-  text-align: center;
+  color: #000000;
 }
 div.ip {
   font-family: "Arial";
   font-size: 10px;
+  border: 0px solid gray;
   color: #CCCCCC;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 80px;
 }
