@@ -12,6 +12,8 @@ Run me as `node ycf.js`
 
 Node version v0.10.15 on Ubuntu 13.10 x86_64
 
+Node version v0.10.26 on Ubuntu 13.10 x86_64
+
 Node version v0.10.26 on Debian 7 x86_64
 
 Node version v0.10.24 on Rasbian Wheezy armv61 Raspberry Pi
