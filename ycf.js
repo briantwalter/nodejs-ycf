@@ -1,5 +1,9 @@
 //
-// ycf.js
+// ycf.js  	Yoda's Cat Facts
+// version	0.0.1 
+// author	Brian Walter @briantwalter
+// description	Display a simple, dynamic webpage with facts about
+//		cats translated via API to Yoda speak.
 //
 // Special thanks to Barry Johnson for the help on callbacks
 // http://stackoverflow.com/questions/22898894/simple-flow-control-in-nodejs
@@ -22,7 +26,6 @@ require('daemon');
 console.log("Daemon started with PID: " + process.pid);
 
 // functions
-
 // get catfact less than 140 chars
 function getcatfact(callback) {
   var catfact = "";
@@ -31,10 +34,8 @@ function getcatfact(callback) {
   restclient.methods.jsonMethod(function (request, response) {
     var catfact = JSON.parse(request);
     var reallength = new String(catfact.facts);
-    //console.log("DEBUG: reallength is: " + reallength.length);
-    ////console.log("DEBUG: catfact is: " + catfact.facts);
     if ( reallength.length > 140 )
-      callback("Cats have 9 lives.")
+      callback("This display was created by @briantwalter. Follow @YodasCatFacts on Twitter for updates.")
     else {
       callback(catfact.facts);
     }
@@ -44,14 +45,18 @@ function getcatfact(callback) {
 // translate passed in text
 function yodaspeak(english, callback) {
   var args = {inputText: english};
-  // create soap client for yoda translation
   soap.createClient(yodaapi, function(err, client) {
     if (err) {
      //console.log("DEBUG: there was a problem with the soap url");
+     callback(err);
     };
     client.yodaTalk(args, function(err, result) {
-      //console.log("DEBUG: translated " + english + " into Yoda speak as " + result.return);
+      if (err) {
+        callback(err);
+      }
+      else {
       callback(result.return);
+      };
     })
   })
 }
