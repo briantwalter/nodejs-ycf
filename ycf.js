@@ -31,7 +31,7 @@ function getcatfact(callback) {
   var catfact = "";
   var restclient = new rest();
   restclient.registerMethod("jsonMethod", catsapi, "GET");
-  restclient.methods.jsonMethod(function (request, response) {
+  restclient.methods.jsonMethod(function(request, response) {
     var catfact = JSON.parse(request);
     var reallength = new String(catfact.facts);
     if ( reallength.length > 140 )
@@ -39,6 +39,9 @@ function getcatfact(callback) {
     else {
       callback(catfact.facts);
     }
+  })
+  restclient.on('error', function(err) {
+    console.error("DEBUG: error in the REST client", err);
   })
 }
 
