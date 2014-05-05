@@ -6,9 +6,7 @@ Simple application that reads cat facts from a public API over http using REST a
 
 ### Usage
 
-Run me as `node app.js`
-or 
-Run me as `npm start`
+Run me as `node app.js` or as `npm start`
 
 ### Verified versions
 
