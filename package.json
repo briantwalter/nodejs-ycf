@@ -1,7 +1,7 @@
 {
   "name": "nodejs-ycf",
   "description": "Yoda's Cat Facts",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "private": "true",
   "maintainers": [
     {
@@ -10,12 +10,14 @@
       "twitter": "@briantwalter"
     }
   ],
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "daemon": "1.1.0",
     "express": "3.4.8",
     "jade": "1.3.0",
     "node-rest-client": "0.8.0",
-    "soap": "0.8.0"
+    "soap": "0.4.2"
   },
   "repositories": [
     {

@@ -21,10 +21,6 @@ var title = "Yoda's Cat Facts";
 var catfact = "BLANK";
 var myipaddr = "BLANK";
 
-// start daemon process
-require('daemon');
-console.log("Daemon started with PID: " + process.pid);
-
 // functions
 // get catfact less than 140 chars
 function getcatfact(callback) {
@@ -86,7 +82,7 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
 app.use(app.router);
 app.use(express.logger('dev'))
-app.use(express.static(__dirname + '/html'))
+app.use(express.static(__dirname + '/public'))
 app.use(express.errorHandler());
 
 // create and display the page if requested
@@ -101,5 +97,5 @@ app.get('/', function(req, res) {
   });
 })
 
-// start the http server
-app.listen(port)
+// start the http server on CF or locally
+app.listen(process.env.VCAP_APP_PORT || port);
