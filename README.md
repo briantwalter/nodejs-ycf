@@ -6,7 +6,9 @@ Simple application that reads cat facts from a public API over http using REST a
 
 ### Usage
 
-Run me as `node ycf.js`
+Run me as `node app.js`
+or 
+Run me as `npm start`
 
 ### Verified versions
 
@@ -24,8 +26,6 @@ Cat facts: http://catfacts-api.appspot.com/api/facts
 
 Yoda translation: http://www.yodaspeak.co.uk/webservice/yodatalk.php?wsdl
 
-### Utilities
+### Pushed to run.pivotal.io
 
-Run me as `node soaptest.js` 
-
-In testing I saw that the SOAP client module performed abnormally with different Node versions, OS versions, etc. so running this utility will help narrow down any problems if there are problems.
+See live instance at http://ycf.cfapps.io
