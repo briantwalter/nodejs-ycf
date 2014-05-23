@@ -20,6 +20,7 @@ var yodaapi = 'http://www.yodaspeak.co.uk/webservice/yodatalk.php?wsdl';
 var title = "Yoda's Cat Facts";
 var catfact = "BLANK";
 var myipaddr = "BLANK";
+var badwords = "mastrabate";
 
 // functions
 // get catfact less than 140 chars
@@ -30,7 +31,7 @@ function getcatfact(callback) {
   restclient.methods.jsonMethod(function(request, response) {
     var catfact = JSON.parse(request);
     var reallength = new String(catfact.facts);
-    if ( reallength.length > 140 )
+    if ( reallength.length > 140 || reallength.match(/mastrabate/i) )
       callback("This display was created by @briantwalter. Follow @YodasCatFacts on Twitter for updates.")
     else {
       callback(catfact.facts);
