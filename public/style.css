@@ -2,17 +2,22 @@
 /* make sure to install font in ~/.fonts			*/
 /* font choices: Bangers, Chinacat, McLaren, PineLintGerm 	*/
 div.page {
-  width: 1060px;
-  height: 740px;
-  padding: 100px;
+  height: 280px;
+  width: 340px;
+  padding: 10px;
   border: 0px solid gray;
-  display: table-cell;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   text-align: center;
   vertical-align: middle;
 }
 div.yoda {
-  font-family: "Chinacat";
-  font-size: 90px;
+  font-family: "Chinacat",cursive;
+  font-size: 30px;
   border: 0px solid gray;
   color: #000000;
 }
