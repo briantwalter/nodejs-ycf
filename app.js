@@ -98,5 +98,14 @@ app.get('/', function(req, res) {
   });
 })
 
+// create and display JSON if api is requested
+app.get('/api', function(req, res) {
+  getcatfact(function(catfact) {
+    yodaspeak(catfact, function(yodacatfact) {
+      res.json({ title: title, catfact: yodacatfact })
+    });
+  });
+})
+
 // start the http server on CF or locally
 app.listen(process.env.VCAP_APP_PORT || port);
