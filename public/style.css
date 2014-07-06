@@ -16,7 +16,7 @@ div.page {
   vertical-align: middle;
 }
 div.yoda {
-  font-family: "Chinacat",cursive;
+  font-family: "Chinacat", "Arial";
   font-size: 30px;
   border: 0px solid gray;
   color: #000000;
