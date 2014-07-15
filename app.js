@@ -1,6 +1,6 @@
 //
 // ycf.js  	Yoda's Cat Facts
-// version	0.0.1 
+// version	0.0.3 
 // author	Brian Walter @briantwalter
 // description	Display a simple, dynamic webpage with facts about
 //		cats translated via API to Yoda speak.
@@ -10,7 +10,6 @@
 //
 
 // variables
-var os = require("os");
 var express = require('express');
 var rest = require('node-rest-client').Client;
 var soap = require('soap');
@@ -19,7 +18,6 @@ var catsapi = 'http://catfacts-api.appspot.com/api/facts';
 var yodaapi = 'http://www.yodaspeak.co.uk/webservice/yodatalk.php?wsdl';
 var title = "Yoda's Cat Facts";
 var catfact = "BLANK";
-var myipaddr = "BLANK";
 var badwords = "masturbate";
 
 // functions
@@ -61,22 +59,6 @@ function yodaspeak(english, callback) {
   })
 }
 
-// get local machine's IPv4 addresses
-function getipaddr() {
-  var interfaces = os.networkInterfaces();
-  var addresses = [];
-  for (i in interfaces) {
-      for (i2 in interfaces[i]) {
-          var address = interfaces[i][i2];
-          if (address.family == 'IPv4' && !address.internal) {
-              addresses.push(address.address)
-          }
-      }
-  }
-  //console.log("DEBUG: IPv4 addrs are " + addresses);
-  return addresses;
-}
-
 // main
 var app = express();
 app.set('views', __dirname + '/views')
@@ -86,16 +68,9 @@ app.use(express.logger('dev'))
 app.use(express.static(__dirname + '/public'))
 app.use(express.errorHandler());
 
-// create and display the page if requested
+// redirect to API document if root is requested
 app.get('/', function(req, res) {
-  var myipaddr = getipaddr();
-  getcatfact(function(catfact) {
-    yodaspeak(catfact, function(yodacatfact) {
-      res.render('index',
-        { title: title, catfact: yodacatfact, myipaddr: myipaddr }
-      )
-    });
-  });
+  res.redirect('apidoc.html');
 })
 
 // create and display JSON if api is requested
