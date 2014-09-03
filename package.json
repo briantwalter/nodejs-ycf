@@ -3,6 +3,9 @@
   "description": "Yoda's Cat Facts",
   "version": "0.1.1",
   "private": "true",
+  "engines": {
+      "node": "0.10.26"
+  },
   "maintainers": [
     {
       "name": "Brian Walter",
